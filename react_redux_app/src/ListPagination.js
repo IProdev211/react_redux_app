@@ -13,6 +13,19 @@ const ListPagination = props => {
     return null;
   }
 
+  const range = [];
+  for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) {
+    range.push(i);
+  }
+
+  const setPage = page => {
+    if(props.pager) {
+      props.onSetPage(page, props.pager(page));
+    }else {
+      props.onSetPage(page, agent.Articles.all(page))
+    }
+  };
+
   return (
     <nav>
       <ul className="pagination">
